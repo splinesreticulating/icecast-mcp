@@ -1,0 +1,54 @@
+{
+  "name": "icecast-mcp",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "icecast-mcp": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "prepare": "npm run build",
+    "inspector": "npx @modelcontextprotocol/inspector node build/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "icecast",
+    "streaming",
+    "audio",
+    "radio",
+    "config-analysis",
+    "devops"
+  ],
+  "author": "",
+  "license": "MIT",
+  "description": "MCP server for analyzing and optimizing Icecast streaming server configurations. Provides security audits, performance tuning, and best practice recommendations.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/splinesreticulating/icecast-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/splinesreticulating/icecast-mcp/issues"
+  },
+  "homepage": "https://github.com/splinesreticulating/icecast-mcp#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.22.0",
+    "fast-xml-parser": "^5.3.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

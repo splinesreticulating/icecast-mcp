@@ -1,0 +1,43 @@
+# Source files (only ship compiled code)
+src/
+tsconfig.json
+
+# Development files
+.github/
+examples/
+*.md
+!README.md
+!LICENSE
+
+# Build artifacts
+*.tsbuildinfo
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Docker (source available on GitHub)
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Misc
+*.log
+npm-debug.log*
