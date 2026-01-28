@@ -19,6 +19,7 @@ MCP server for analyzing and optimizing Icecast streaming server configurations.
 A Model Context Protocol (MCP) server for analyzing Icecast streaming server configurations. Provides automated security audits, performance recommendations, and capacity planning for internet radio stations and streaming infrastructure.
 
 **Features:**
+
 - Security auditing (authentication, credentials, access control)
 - Performance analysis (limits, buffers, threading)
 - Capacity planning based on listener counts
@@ -27,6 +28,7 @@ A Model Context Protocol (MCP) server for analyzing Icecast streaming server con
 ## Features
 
 ### Configuration Analysis
+
 - Parse and validate Icecast XML configurations
 - Detect security issues (default credentials, missing authentication)
 - Identify performance bottlenecks (buffer sizes, thread pools, limits)
@@ -34,6 +36,7 @@ A Model Context Protocol (MCP) server for analyzing Icecast streaming server con
 - Validate proxy configurations (X-Forwarded-For, hostname)
 
 ### Best Practice Recommendations
+
 - Tailored advice for small, medium, and large deployments
 - Capacity planning based on expected listener counts
 - Security hardening guidelines
@@ -41,13 +44,13 @@ A Model Context Protocol (MCP) server for analyzing Icecast streaming server con
 
 ### What It Checks
 
-| Category | Checks |
-|----------|--------|
-| **Security** | Authentication config, default credentials, relay passwords, admin security |
-| **Performance** | Client limits, buffer sizes (queue/burst), thread pools, log verbosity |
-| **Capacity** | Listener count vs. limits, resource allocation, scaling recommendations |
-| **Reliability** | Mount points, fallback configuration, timeout settings |
-| **Operations** | Hostname setup, proxy config, logging, log rotation |
+| Category        | Checks                                                                      |
+| --------------- | --------------------------------------------------------------------------- |
+| **Security**    | Authentication config, default credentials, relay passwords, admin security |
+| **Performance** | Client limits, buffer sizes (queue/burst), thread pools, log verbosity      |
+| **Capacity**    | Listener count vs. limits, resource allocation, scaling recommendations     |
+| **Reliability** | Mount points, fallback configuration, timeout settings                      |
+| **Operations**  | Hostname setup, proxy config, logging, log rotation                         |
 
 ## Installation
 
@@ -83,12 +86,12 @@ Add to your Claude Desktop configuration file:
 
 ```json
 {
-  "mcpServers": {
-    "icecast": {
-      "command": "node",
-      "args": ["/absolute/path/to/icecast-mcp/build/index.js"]
+    "mcpServers": {
+        "icecast": {
+            "command": "node",
+            "args": ["/absolute/path/to/icecast-mcp/build/index.js"]
+        }
     }
-  }
 }
 ```
 
@@ -96,19 +99,12 @@ Or using Docker:
 
 ```json
 {
-  "mcpServers": {
-    "icecast": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-v",
-        "/path/to/your/configs:/configs:ro",
-        "icecast-mcp"
-      ]
+    "mcpServers": {
+        "icecast": {
+            "command": "docker",
+            "args": ["run", "-i", "--rm", "-v", "/path/to/your/configs:/configs:ro", "icecast-mcp"]
+        }
     }
-  }
 }
 ```
 
@@ -132,17 +128,18 @@ The server communicates over stdio and follows the MCP specification. Compatible
 Analyze an Icecast XML configuration file and receive detailed recommendations.
 
 **Input Schema:**
+
 ```json
 {
-  "configPath": "/path/to/icecast.xml",
-  "expectedListeners": 200
+    "configPath": "/path/to/icecast.xml",
+    "expectedListeners": 200
 }
 ```
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `configPath` | string | Yes | - | Absolute path to Icecast XML config |
-| `expectedListeners` | number | No | 100 | Expected concurrent listeners |
+| Parameter           | Type   | Required | Default | Description                         |
+| ------------------- | ------ | -------- | ------- | ----------------------------------- |
+| `configPath`        | string | Yes      | -       | Absolute path to Icecast XML config |
+| `expectedListeners` | number | No       | 100     | Expected concurrent listeners       |
 
 **Example Usage:**
 
@@ -161,11 +158,13 @@ Expected listeners: 500
 ## CRITICAL ISSUES
 
 ### Security: No authentication configured
+
 Configure source-password and admin-password to secure your stream.
 
 ## WARNINGS
 
 ### Capacity: Client limit is quite low
+
 Client limit is 50. This may cause connection rejections during peak times.
 Current: 50
 Recommended: 128
@@ -173,6 +172,7 @@ Recommended: 128
 ## INFORMATION
 
 ### Configuration: X-Forwarded-For is enabled
+
 Good! This is correct when running behind a reverse proxy like Caddy.
 ```
 
@@ -181,17 +181,19 @@ Good! This is correct when running behind a reverse proxy like Caddy.
 Get deployment-specific best practices and configuration recommendations.
 
 **Input Schema:**
+
 ```json
 {
-  "useCase": "medium"
+    "useCase": "medium"
 }
 ```
 
-| Parameter | Type | Required | Options | Description |
-|-----------|------|----------|---------|-------------|
-| `useCase` | string | Yes | `small`, `medium`, `large` | Deployment size |
+| Parameter | Type   | Required | Options                    | Description     |
+| --------- | ------ | -------- | -------------------------- | --------------- |
+| `useCase` | string | Yes      | `small`, `medium`, `large` | Deployment size |
 
 **Use Case Definitions:**
+
 - **small**: < 50 concurrent listeners
 - **medium**: 50-500 concurrent listeners
 - **large**: 500+ concurrent listeners
@@ -225,12 +227,12 @@ docker run -i --rm \
 ```yaml
 version: '3.8'
 services:
-  icecast-mcp:
-    build: .
-    volumes:
-      - ./ops/icecast:/config:ro
-    stdin_open: true
-    tty: true
+    icecast-mcp:
+        build: .
+        volumes:
+            - ./ops/icecast:/config:ro
+        stdin_open: true
+        tty: true
 ```
 
 ## Development
@@ -259,10 +261,10 @@ A typical workflow:
 1. Install and configure icecast-mcp
 2. Ask Claude: "Analyze my Icecast config at `/etc/icecast2/icecast.xml` for 200 listeners"
 3. Get specific recommendations:
-   - Optimize client limits for your traffic
-   - Add relay password configuration
-   - Configure fallback mount points
-   - Enable log archiving
+    - Optimize client limits for your traffic
+    - Add relay password configuration
+    - Configure fallback mount points
+    - Enable log archiving
 
 ## Architecture
 
@@ -303,12 +305,6 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- Built with [@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/sdk)
+- Built with [@modelcontextprotocol/sdk](https://github.com/modelcontextprotocol/typescript-sdk)
 
 ---
-
-<div align="center">
-
-[Report Bug](https://github.com/splinesreticulating/icecast-mcp/issues) • [Request Feature](https://github.com/splinesreticulating/icecast-mcp/issues)
-
-</div>
